@@ -1,15 +1,13 @@
 require('dotenv').config();
-// const path = require('path');
-const Telegraf = require('telegraf');
 const axios = require('axios');
-const fs = require('fs');
-// const fastifyApp = require('fastify')({ trustProxy: true });
+const Telegraf = require('telegraf');
+const fastifyApp = require('fastify')({ trustProxy: true });
 const SocksAgent = require('socks5-https-client/lib/Agent');
 const getLocalImage = require('./src/get-local-image');
 const getNames = require('./src/get-names');
 const getStats = require('./src/get-stats');
 
-const { PROXY, TOKEN } = process.env;
+const { PROXY, TOKEN, HOST, PORT } = process.env;
 
 const options = {};
 
@@ -44,11 +42,27 @@ bot.on('text', async ({ replyWithPhoto, message }) => {
 		const imagePath = await processText(message.text);
 
 		if (imagePath) {
-			await replyWithPhoto({ source: fs.createReadStream(`./${imagePath}`) });
+			await replyWithPhoto(`${HOST}${imagePath}`);
 		}
 	} catch (e) {
 		console.warn(e);
 	}
 });
 
-bot.launch().then(() => console.log('STARTED'));
+bot.telegram.setWebhook(`${HOST}/telegram-webhook`).then(() => {
+    console.log('STARTED');
+});
+
+fastifyApp.use(bot.webhookCallback('/telegram-webhook'));
+
+fastifyApp.get('/', (request, reply) => {
+    reply.send({ npmstats: 'works' })
+});
+
+fastifyApp.register(require('fastify-static'), {
+    root: path.join(__dirname, 'tmp'),
+    prefix: '/tmp/',
+});
+
+fastifyApp.listen(PORT, '0.0.0.0');
+

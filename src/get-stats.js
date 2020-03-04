@@ -30,6 +30,7 @@ module.exports = async (name) => {
         forks: formatNumber(github.forksCount),
         issues: formatNumber(github.issues.openCount),
         subscribers: formatNumber(github.subscribersCount),
+
         updated: dayjs(metadata.date).fromNow(), // Last publish
     };
 };
