@@ -1095,7 +1095,7 @@
   -ms-flex-pack: distribute;
   justify-content: space-around;
   width: 100%;
-  margin-top: 40px; }
+  margin-top: 60px; }
 .content-container-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1169,14 +1169,8 @@
 .time-container {
   border-top: 1px solid #edeef0;
   padding-top: 5vh; }
-@media screen and (max-width: 48em) {
-  .time-container {
-    padding-top: 3vh; } }
 .size-container {
-  margin-bottom: 5vh; }
-@media screen and (max-width: 48em) {
-  .size-container {
-    margin-bottom: 3vh; } }
+  margin-bottom: 60px; }
 .size-container,
 .time-container {
   display: -webkit-box;

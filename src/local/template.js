@@ -124,8 +124,8 @@ module.exports = (packages) => {
                     </div>
                   </div>
 
-                  <div class="size-container"><h3> More </h3>
-                    <div class="size-stats wrap-stats smaller-stats">
+                  <div class="size-container"><h3> Stars </h3>
+                    <div class="size-stats smaller-stats">
 
                       <div class="stat-container">
                         <div class="stat-container__value-container">
@@ -133,30 +133,6 @@ module.exports = (packages) => {
                             <div class="stat-container__value time">${stats.stars}</div>
                           </div>
                           <div class="stat-container__unit">stars</div>
-                        </div>
-                      </div>
-                      <div class="stat-container">
-                        <div class="stat-container__value-container">
-                          <div class="stat-container__value-wrap">
-                            <div class="stat-container__value time">${stats.forks}</div>
-                          </div>
-                          <div class="stat-container__unit">forks</div>
-                        </div>
-                      </div>
-                      <div class="stat-container">
-                        <div class="stat-container__value-container">
-                          <div class="stat-container__value-wrap">
-                            <div class="stat-container__value time">${stats.issues}</div>
-                          </div>
-                          <div class="stat-container__unit">issues</div>
-                        </div>
-                      </div>
-                      <div class="stat-container">
-                        <div class="stat-container__value-container">
-                          <div class="stat-container__value-wrap">
-                            <div class="stat-container__value time">${stats.subscribers}</div>
-                          </div>
-                          <div class="stat-container__unit">subscribers</div>
                         </div>
                       </div>
                     </div>
