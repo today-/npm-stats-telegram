@@ -132,7 +132,6 @@ module.exports = (packages) => {
                           <div class="stat-container__value-wrap">
                             <div class="stat-container__value time">${stats.stars}</div>
                           </div>
-                          <div class="stat-container__unit">stars</div>
                         </div>
                       </div>
                     </div>
