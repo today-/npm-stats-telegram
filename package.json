@@ -16,6 +16,7 @@
     "chalk": "^2.4.1",
     "clipboardy": "^1.2.3",
     "codemirror": "^5.49.0",
+    "dayjs": "^1.8.21",
     "del": "^3.0.0",
     "dotenv": "^8.2.0",
     "fastify": "^2.9.0",

@@ -2,9 +2,11 @@ require('dotenv').config();
 // const path = require('path');
 const Telegraf = require('telegraf');
 const axios = require('axios');
+const fs = require('fs');
 // const fastifyApp = require('fastify')({ trustProxy: true });
 const SocksAgent = require('socks5-https-client/lib/Agent');
 const getLocalImage = require('./src/get-local-image');
+const getNames = require('./src/get-names');
 const getStats = require('./src/get-stats');
 
 const { PROXY, TOKEN } = process.env;
@@ -20,22 +22,29 @@ if (PROXY) {
     axios.defaults.httpsAgent = agent;
 }
 
+async function processText(text = '') {
+    const names = getNames(text);
+
+    if (names && names.length) {
+        const packages = await Promise.all(names.map(n => getStats(n).catch(() => null)));
+        const gotPackages = packages.filter(p => p)
+        return getLocalImage(gotPackages);
+    }
+}
+
 const bot = new Telegraf(TOKEN, options);
 
 bot.start((ctx) => ctx.reply('Welcome!'));
-bot.help((ctx) => ctx.reply('Send me text'));
+bot.help((ctx) => ctx.reply('Send me package names'));
 
-bot.on('text', async ({ reply, message }) => {
+bot.on('text', async ({ replyWithPhoto, message }) => {
 	console.log('Received message. Processing', message.text);
 
 	try {
-		const stats = await getStats(message.text);
+		const imagePath = await processText(message.text);
 
-		if (stats) {
-			const imagePath = await getLocalImage(stats);
-
-            await reply(imagePath);
-			// await replyWithPhoto(`${HOST}${imagePath}`);
+		if (imagePath) {
+			await replyWithPhoto({ source: fs.createReadStream(`./${imagePath}`) });
 		}
 	} catch (e) {
 		console.warn(e);

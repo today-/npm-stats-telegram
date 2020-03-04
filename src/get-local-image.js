@@ -1,11 +1,12 @@
+// const fs = require('fs');
 const generate = require('nanoid/generate');
 const initBrowser = require('./init-browser');
 const getLocalTemplate = require('./local/template');
 
 const IMG_TYPE = 'png';
 
-module.exports = async (stats) => {
-	const newString = getLocalTemplate(stats);
+module.exports = async (packages) => {
+	const newString = getLocalTemplate(packages);
 
 	const SAVE_DIRECTORY = `${process.cwd()}/tmp`;
 	const FILE_NAME = `${generate('123456abcdef', 10)}.${IMG_TYPE}`;
@@ -18,6 +19,8 @@ module.exports = async (stats) => {
 	const exportContainer = await page.$('#content');
 
 	const elementBounds = await exportContainer.boundingBox();
+
+	// fs.writeFileSync(`${FULL_SAVE_PATH}.html`, newString);
 
 	await page.screenshot({
 		path: FULL_SAVE_PATH,

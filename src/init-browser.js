@@ -14,7 +14,7 @@ module.exports = async () => {
 		// Set viewport to something big
 		// Prevents Carbon from cutting off lines
 		await page.setViewport({
-			width: 1280,
+			width: 3840,
 			height: 1000,
 			deviceScaleFactor: 1
 		});

@@ -1,27 +1,35 @@
 const axios = require('axios');
+const dayjs = require('dayjs');
+const relativeTime = require('dayjs/plugin/relativeTime')
+const formatSize = require('./format-size');
 
-module.exports = async (text) => {
-    const { data: bundlephobia } = await axios.get(`https://bundlephobia.com/api/size?package=${text}`);
-    const { data: npms } = await axios.get(`https://api.npms.io/v2/package/${text}`);
-    const { metadata } = npms.collected;
+dayjs.extend(relativeTime);
 
+function formatNumber(number = '') {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
-    console.log(bundlephobia);
-    console.log(npms);
-
-    // size + gzip
-    // downloads
-    // stars
-    // issues
-    // forks ?
-    // quality ?
-    // popularity ?
-    // releases ? / updated
+module.exports = async (name) => {
+    const [{ data: bundlephobia }, { data: npms }] = await Promise.all([
+        axios.get(`https://bundlephobia.com/api/size?package=${name}`),
+        axios.get(`https://api.npms.io/v2/package/${encodeURIComponent(name)}`)
+    ])
+    const { metadata, npm, github } = npms.collected;
 
     return {
         name: bundlephobia.name || metadata.name,
         description: bundlephobia.description || metadata.description,
         version: bundlephobia.version || metadata.version,
-        dependencyCount: bundlephobia.dependencyCount || npms.collected.npm.dependentsCount,
+        dependencyCount: formatNumber(bundlephobia.dependencyCount || npm.dependentsCount) || 'no',
+
+        size: formatSize(bundlephobia.size).split(' '),
+        gzip: formatSize(bundlephobia.gzip).split(' '),
+
+        downloads: npm.downloads && formatNumber(npm.downloads[1].count), // last week
+        stars: formatNumber(github.starsCount),
+        forks: formatNumber(github.forksCount),
+        issues: formatNumber(github.issues.openCount),
+        subscribers: formatNumber(github.subscribersCount),
+        updated: dayjs(metadata.date).fromNow(), // Last publish
     };
 };
