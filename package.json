@@ -1,6 +1,6 @@
 {
   "name": "napm-stats-telegram",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Beautiful images of your code in Telegram.",
   "license": "MIT",
   "engines": {
@@ -31,7 +31,7 @@
     "jsonfile": "^5.0.0",
     "listr": "^0.14.3",
     "lodash": "4.17.19",
-    "meow": "^5.0.0",
+    "meow": "^7.1.1",
     "nanoid": "^2.0.0",
     "node-telegram-bot-api": "^0.30.0",
     "opn": "^5.4.0",
@@ -42,10 +42,10 @@
     "socks5-https-client": "^1.2.1",
     "telegraf": "^3.32.0",
     "tempy": "^0.2.1",
-    "terminal-image": "^0.1.2"
+    "terminal-image": "^1.2.1"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
+    "ava": "^3.13.0",
     "child-process-promise": "^2.2.1",
     "execa": "^1.0.0",
     "husky": "^1.0.0-rc.14",
