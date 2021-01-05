@@ -12,7 +12,7 @@
     "ava": "ava --serial"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chalk": "^2.4.1",
     "clipboardy": "^1.2.3",
     "codemirror": "^5.49.0",
