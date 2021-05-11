@@ -30,7 +30,7 @@
     "jimp": "^0.16.1",
     "jsonfile": "^5.0.0",
     "listr": "^0.14.3",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "meow": "^7.1.1",
     "nanoid": "^2.0.0",
     "node-telegram-bot-api": "^0.30.0",
