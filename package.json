@@ -15,7 +15,7 @@
     "axios": "^0.19.2",
     "chalk": "^2.4.1",
     "clipboardy": "^1.2.3",
-    "codemirror": "^5.49.0",
+    "codemirror": "^5.58.2",
     "dayjs": "^1.8.21",
     "del": "^3.0.0",
     "dotenv": "^8.2.0",
