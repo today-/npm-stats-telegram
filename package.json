@@ -19,7 +19,7 @@
     "dayjs": "^1.10.7",
     "del": "^6.0.0",
     "dotenv": "^10.0.0",
-    "fastify": "^3.22.0",
+    "fastify": "^3.29.4",
     "fastify-static": "^4.2.3",
     "file-exists": "^5.0.1",
     "file-extension": "^4.0.5",
